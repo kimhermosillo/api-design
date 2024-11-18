@@ -12,10 +12,10 @@ router.get('/product/:id', () => {
 
 })
 
-router.put('/product/:id', body('name').isString(), handleInputErrors, (req, res) => {
+router.put('/product/:id', body('title').exists(), body('body').exists(), body('status').optional(), handleInputErrors, (req, res) => {
 })
 
-router.post('/product', () => {
+router.post('/product', body('name').isString(), handleInputErrors, () => {
 
 })
 
@@ -32,11 +32,11 @@ router.get('/update/:id', () => {
 
 })
 
-router.put('/update/:id', body('title').isString(), body('body').isString(), handleInputErrors, (req, res) => {
+router.put('/update/:id', body('title').optional(), body('body').optional(), body('status').isIn(['IN_PROGRESS', 'SHIPPED', 'DEPRECATED']), body('version').optional(), handleInputErrors, (req, res) => {
 
 })
 
-router.post('/update', () => {
+router.post('/update', body('title').exists(), body('body').exists(), handleInputErrors, () => {
 
 })
 
@@ -49,7 +49,7 @@ router.get('/updatepoint', () => {
 
 })
 
-router.get('/updatepoint/:id', () => {
+router.get('/updatepoint/:id', body('name').optional().isString(), body('description').optional().isString(), handleInputErrors, () => {
 
 })
 
@@ -57,7 +57,7 @@ router.put('/updatepoint/:id', () => {
 
 })
 
-router.post('/updatepoint', () => {
+router.post('/updatepoint', body('name').isString(), body('description').isString(), body('updateId').exists().isString(), handleInputErrors, () => {
 
 })
 
