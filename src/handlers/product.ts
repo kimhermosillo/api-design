@@ -22,7 +22,7 @@ export const getOneProduct = async (req, res) => {
         }
     })
 
-    req.json({ data: product })
+    res.json({ data: product })
 }
 
 export const createProduct = async (req, res) => {
